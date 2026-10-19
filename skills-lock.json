@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "skill-scanner": {
+      "source": "getsentry/skills",
+      "sourceType": "github",
+      "skillPath": "skills/skill-scanner/SKILL.md",
+      "computedHash": "9ec22514620fedc4e9f2d9b886551a1d4f8383dd272c210d85526a71b7b84adb"
+    }
+  }
+}
