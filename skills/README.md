@@ -58,15 +58,18 @@ A `skills-lock.json` file is committed to track third-party skill dependencies.
 
 | Skill | Description |
 | :--- | :--- |
-| [`sid-scout`](./sid-scout/SKILL.md) | Read-only codebase explorer that outputs minimal context snapshots. |
+| [`sid-a11y-review`](./sid-a11y-review/SKILL.md) | WCAG 2.2 AA audit for semantic HTML, ARIA, focus, and contrast. |
+| [`sid-dep-audit`](./sid-dep-audit/SKILL.md) | Audit dependencies for supply-chain risk, age gating (< 30 days), and trivial utilities. |
 | [`sid-draft`](./sid-draft/SKILL.md) | Fast first-pass React/TypeScript component drafter prioritizing layout fidelity. |
-| [`sid-review`](./sid-review/SKILL.md) | Opinionated frontend review focusing on layout, composition, and common anti-patterns. |
 | [`sid-health-check`](./sid-health-check/SKILL.md) | Maintainability audit for React/TS/Tailwind v4 catching structural debt. |
+| [`sid-pii-check`](./sid-pii-check/SKILL.md) | Scan git changes and code for personal info, local paths, client names, and secrets. |
+| [`sid-plan-audit`](./sid-plan-audit/SKILL.md) | Sceptically distill implementation plans to expose implicit decisions and scope. |
+| [`sid-pr-prep`](./sid-pr-prep/SKILL.md) | Prepare concise, evidence-first pull request descriptions with manual review checklists. |
+| [`sid-review`](./sid-review/SKILL.md) | Opinionated frontend review focusing on layout, composition, and common anti-patterns. |
+| [`sid-scout`](./sid-scout/SKILL.md) | Read-only codebase explorer that outputs minimal context snapshots. |
+| [`sid-summarise-activity`](./sid-summarise-activity/SKILL.md) | Summarises sprint commits and PRs for timesheets and standups. |
 | [`sid-test`](./sid-test/SKILL.md) | Behaviour-driven test authoring using shared helpers and edge mocks. |
 | [`sid-test-review`](./sid-test-review/SKILL.md) | Sceptical review of test suites to catch fake coverage and weakened assertions. |
-| [`sid-a11y-review`](./sid-a11y-review/SKILL.md) | WCAG 2.2 AA audit for semantic HTML, ARIA, focus, and contrast. |
-| [`sid-pii-check`](./sid-pii-check/SKILL.md) | Scan git changes and code for personal info, local paths, client names, and secrets. |
-| [`sid-summarise-activity`](./sid-summarise-activity/SKILL.md) | Summarises sprint commits and PRs for timesheets and standups. |
 
 ---
 

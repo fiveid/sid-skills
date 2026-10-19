@@ -23,15 +23,18 @@ Modular instruction sets conforming to the [Agent Skills specification](https://
 
 | Skill | Description |
 | :--- | :--- |
-| [`sid-scout`](skills/sid-scout/SKILL.md) | Read-only codebase explorer that outputs a minimal context snapshot. |
+| [`sid-a11y-review`](skills/sid-a11y-review/SKILL.md) | WCAG 2.2 AA accessibility audit for HTML structure, ARIA, focus, and contrast. |
+| [`sid-dep-audit`](skills/sid-dep-audit/SKILL.md) | Audit dependencies for supply-chain risk, age gating (< 30 days), and trivial utilities. |
 | [`sid-draft`](skills/sid-draft/SKILL.md) | Rapid first-pass component drafting prioritizing layout fidelity over completeness. |
-| [`sid-review`](skills/sid-review/SKILL.md) | Opinionated frontend review targeting layout bugbears and common anti-patterns. |
 | [`sid-health-check`](skills/sid-health-check/SKILL.md) | Structural maintainability audit for React / TypeScript / Tailwind v4. |
+| [`sid-pii-check`](skills/sid-pii-check/SKILL.md) | Scan git changes and code for personal info, local paths, client names, and secrets. |
+| [`sid-plan-audit`](skills/sid-plan-audit/SKILL.md) | Sceptically distill implementation plans to expose implicit decisions and scope. |
+| [`sid-pr-prep`](skills/sid-pr-prep/SKILL.md) | Prepare concise, evidence-first pull request descriptions with manual review checklists. |
+| [`sid-review`](skills/sid-review/SKILL.md) | Opinionated frontend review targeting layout bugbears and common anti-patterns. |
+| [`sid-scout`](skills/sid-scout/SKILL.md) | Read-only codebase explorer that outputs a minimal context snapshot. |
+| [`sid-summarise-activity`](skills/sid-summarise-activity/SKILL.md) | Git commit and PR activity summariser for sprint reviews and timesheets. |
 | [`sid-test`](skills/sid-test/SKILL.md) | Behaviour-driven test authoring using shared render helpers and edge mocks. |
 | [`sid-test-review`](skills/sid-test-review/SKILL.md) | Sceptical test suite review looking for fake coverage and weakened assertions. |
-| [`sid-a11y-review`](skills/sid-a11y-review/SKILL.md) | WCAG 2.2 AA accessibility audit for HTML structure, ARIA, focus, and contrast. |
-| [`sid-pii-check`](skills/sid-pii-check/SKILL.md) | Scan git changes and code for personal info, local paths, client names, and secrets. |
-| [`sid-summarise-activity`](skills/sid-summarise-activity/SKILL.md) | Git commit and PR activity summariser for sprint reviews and timesheets. |
 
 ### Quickstart
 
