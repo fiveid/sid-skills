@@ -38,3 +38,75 @@ On a large headless project (Next.js Pages Router with Storybook, plus a local C
 
 My current setup is a `wt-preview` rule in `.claude/rules`, plus helper scripts. Each worktree's frontend points at the upstream's public, read-only page API instead of the local CMS. The script picks the port, the agent builds for production and serves it, and then gives me the URL to test against. In practice that's two agent worktrees plus the main tree, with brief memory spikes during builds.
 
+
+### **Prompt: setting this up on your own project**
+
+This is roughly the brief I'd give an agent to build something similar for a different project. It's distilled from building my own setup and hasn't yet been run from scratch elsewhere, so expect to adjust it.
+
+The important part is stage 2: the agent measures the options and stops, and you choose.
+
+```text
+I run several coding agents in parallel, each in its own git worktree. I want each worktree
+to be able to build and run its own copy of the frontend, so an agent can check its changes
+in a browser without disturbing my main local setup or the other worktrees.
+
+Work in three stages. Stop after stages 1 and 2 for me to review.
+
+1. Investigate (read-only)
+   - How does the app run locally today: dev server, containers, ports, backend?
+   - What stops a worktree running it now: port clashes, mounts pointing at the main
+     checkout, a shared local backend?
+   - How much memory is available, and how much does my main setup already use?
+   - Is there a remote environment we could read data from instead of a local backend?
+     Is it read-only, and does it serve only public data?
+
+2. Measure and compare
+   - Measure the time and peak memory of each realistic option, e.g. a dev server per
+     worktree, a production build plus server, a static Storybook build vs its dev server.
+   - Present a table: memory held while running, peak memory, feedback loop, what it can
+     and can't check, and any repo changes needed.
+   - Recommend one, then stop. I'll decide.
+
+3. Build the chosen option as one helper script, aiming for:
+   - The script owns ports: a stable port per worktree, refusing to start if it's taken.
+   - One heavy job (install, build) at a time across all worktrees, using a lock.
+   - A free-memory check before each heavy job, keeping a reserve for my main setup.
+   - Each preview runs as one process group with an idle timeout, so stopping it leaves
+     nothing behind.
+   - Commands for up, down, status, logs, and prune (clean up previews whose worktree is gone).
+   - With a remote upstream: proxy it on the server side, rewrite its absolute URLs to the
+     preview's own, and block writes by default. Only allow POST endpoints you've checked
+     are read-only.
+   - A hostname per worktree if the app relies on cookies, because cookies on localhost
+     are shared across ports.
+   - Optionally, a headless page check (screenshot, console errors, failed requests), so
+     you can verify a page without me.
+
+Constraints:
+- No real secrets. It must work without production or write credentials.
+- Don't install anything on my machine outside the project. Prefer containers or the
+  project's existing toolchain.
+- Keep it opt-in and out of the shared repo unless I say otherwise (e.g. untracked and
+  excluded via .git/info/exclude). No changes to CI or other developers' setups.
+
+Watch for:
+- Build-time config (e.g. NEXT_PUBLIC_* in Next.js) is baked in, so set per-worktree
+  ports and upstream URLs before building.
+- When memory runs out, the OS often kills the biggest process, which may be my main dev
+  server rather than the worktree that caused it. Dev server caches can grow large enough
+  to trigger this on their own.
+- Headless browsers in containers can render no text at all without a font config.
+
+Finish with a short README (commands, URLs, limits), an ADR recording the options,
+measurements and decision, and the instructions you'll need in future sessions, added to my
+local, untracked agent instructions (e.g. CLAUDE.local.md).
+```
+
+### **Stack-specific tips**
+
+If your stack matches, paste the relevant tips under the prompt, as options to measure rather than conclusions. The numbers are single runs on one large project and one machine, so treat them as rough.
+
+* **Next.js: serve a `standalone` build.** With `output: 'standalone'`, a production build runs as a small Node server. Mine sat at about 0.2–0.3 GB, against 2–2.5 GB for a warm dev server (peaking at about 3.7 GB). The build itself took about 60s and peaked at about 1.6 GB.  
+* **Storybook: build statically and serve the files.** A plain file server over `storybook-static` held about 20 MB, against 1.3–2 GB for the Storybook dev server. Keep the dev server for when you're iterating on a component yourself.  
+* **Storybook: use a test build for checks.** `storybook build --test` keeps every story but drops the docs pages, autodocs and other docs-only features. It roughly halved build time (21–25s against 47s) and cut peak memory (about 2.7 GB against 3.3 GB). The same story rendered pixel-identical from a full build, a test build and the dev server, so it's fine for visual checks. Run a full build when the docs pages are what you're checking.  
+* **pnpm: share the store between worktrees.** Each worktree still gets its own `node_modules` and lockfile, but the default store is content-addressed, so sharing it is safe and installs in a new worktree are quick.
