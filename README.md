@@ -28,7 +28,7 @@ Modular instruction sets conforming to the [Agent Skills specification](https://
 | [`sid-draft`](skills/sid-draft/SKILL.md) | Rapid first-pass component drafting prioritizing layout fidelity over completeness. |
 | [`sid-health-check`](skills/sid-health-check/SKILL.md) | Structural maintainability audit for React / TypeScript / Tailwind v4. |
 | [`sid-pii-check`](skills/sid-pii-check/SKILL.md) | Scan git changes and code for personal info, local paths, client names, and secrets. |
-| [`sid-plan-audit`](skills/sid-plan-audit/SKILL.md) | Sceptically distill implementation plans to expose implicit decisions and scope. |
+| [`sid-plan-audit`](skills/sid-plan-audit/SKILL.md) | Sceptically distill implementation plans to expose implicit decisions, scope, and missing guardrails. |
 | [`sid-pr-prep`](skills/sid-pr-prep/SKILL.md) | Prepare concise, evidence-first pull request descriptions with manual review checklists. |
 | [`sid-review`](skills/sid-review/SKILL.md) | Opinionated frontend review targeting layout bugbears and common anti-patterns. |
 | [`sid-scout`](skills/sid-scout/SKILL.md) | Read-only codebase explorer that outputs a minimal context snapshot. |

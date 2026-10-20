@@ -63,7 +63,7 @@ A `skills-lock.json` file is committed to track third-party skill dependencies.
 | [`sid-draft`](./sid-draft/SKILL.md) | Fast first-pass React/TypeScript component drafter prioritizing layout fidelity. |
 | [`sid-health-check`](./sid-health-check/SKILL.md) | Maintainability audit for React/TS/Tailwind v4 catching structural debt. |
 | [`sid-pii-check`](./sid-pii-check/SKILL.md) | Scan git changes and code for personal info, local paths, client names, and secrets. |
-| [`sid-plan-audit`](./sid-plan-audit/SKILL.md) | Sceptically distill implementation plans to expose implicit decisions and scope. |
+| [`sid-plan-audit`](./sid-plan-audit/SKILL.md) | Sceptically distill implementation plans to expose implicit decisions, scope, and missing guardrails. |
 | [`sid-pr-prep`](./sid-pr-prep/SKILL.md) | Prepare concise, evidence-first pull request descriptions with manual review checklists. |
 | [`sid-review`](./sid-review/SKILL.md) | Opinionated frontend review focusing on layout, composition, and common anti-patterns. |
 | [`sid-scout`](./sid-scout/SKILL.md) | Read-only codebase explorer that outputs minimal context snapshots. |
