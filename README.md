@@ -6,14 +6,16 @@ A personal collection of practical guidelines, workflows, and reusable skills fo
 
 ## 1. [Guidelines for Humans (HUMANS.md)](HUMANS.md)
 
-Real-world reflections on working with AI coding agents, focusing on the human bottleneck: where attention is best spent, how to fight review fatigue, and how to stay in control of the codebase.
+The guiding principles: real-world reflections on working with AI coding agents, focusing on the human bottleneck. Where attention is best spent, how to fight review fatigue, and how to stay in control of the codebase.
 
 - **Risks & Mitigations**: Planning spirals, plan drift, review fatigue, and gating dependencies
-- **Parallel Worktrees**: Running multi-agent streams without hitting review bottlenecks
-- **Secrets & Sandboxing**: Practical isolation tiers (built-in, container, remote)
-- **Project Lifecycle**: Shifting gates from *Discovery* (speed) to *Buildout* to *Production* (safety)
-- **Hierarchy of Verification**: Five levels of review responsibility (CI ➔ Architecture ➔ Functionality ➔ Scope ➔ Intent)
-- **Testing with Confidence**: Spotting test theatre, edge-only mocking, and verifying tests can fail
+- **Principles**: Parallel development, secrets, project lifecycle, where to spend review attention, and testing
+- **Rules of thumb**: Trust your gut, know when to stop prompting, own what you merge
+
+The concrete, actionable side lives in `docs/`:
+
+- **[Guides](docs/guides/README.md)**: Practices I use and have found worth keeping (parallel worktrees, secrets, testing with confidence)
+- **[Proposals](docs/proposals/README.md)**: Frameworks and team decisions still being tested (project lifecycle, hierarchy of verification, sandboxing tiers)
 
 ---
 

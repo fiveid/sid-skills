@@ -8,7 +8,9 @@ Read this document before writing or modifying any guidelines, documentation, or
 
 ## 1. Repository Layout
 
-- **[`HUMANS.md`](./HUMANS.md)**: Real-world reflections, risks, and practical workflows for developers working with AI agents.
+- **[`HUMANS.md`](./HUMANS.md)**: The guiding principles. Real-world reflections, risks and rules of thumb for developers working with AI agents.
+- **[`docs/guides/`](./docs/guides/README.md)**: Concrete practices that put those principles to work and have held up in use.
+- **[`docs/proposals/`](./docs/proposals/README.md)**: Frameworks and team decisions that are still being tested.
 - **[`skills/`](./skills/README.md)**: Modular agent instruction sets conforming to the [Agent Skills spec](https://agentskills.io/).
 
 ---
@@ -32,7 +34,13 @@ Read this document before writing or modifying any guidelines, documentation, or
 
 ---
 
-## 4. Working with Guidelines (`HUMANS.md`)
+## 4. Working with Guidelines (`HUMANS.md` and `docs/`)
+
+Where content goes:
+- **`HUMANS.md`** holds the *why*: principles, observed risks and rules of thumb. Each principle gets a short summary there and links to the guide or proposal that makes it concrete.
+- **`docs/guides/`** holds the *how* for practices that have been tried and kept.
+- **`docs/proposals/`** holds the *how* for ideas that are still untested or need a team decision. Each proposal opens with a **Status** line and a **Responds to** line naming the risk it addresses. When a proposal proves itself, move it into a guide.
+- Say each thing once. A summary in `HUMANS.md` states the principle; the steps live only in the linked doc.
 
 When expanding or refining guidelines:
 - Maintain the existing visual structure and headings where possible.
