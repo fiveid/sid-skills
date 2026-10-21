@@ -1,7 +1,7 @@
 # **Project lifecycle**
 
 **Status:** Proposal. The phases reflect my own projects so far; the checkpoint lists are examples, not yet used as a formal gate.  
-**Responds to:** [architectural drift and plan drift](../../HUMANS.md#risks). The reasoning is in [HUMANS.md](../../HUMANS.md#project-lifecycle).
+**Responds to:** [architectural drift](../guides/risks-and-mitigations.md#architectural-drift) and [plan drift](../guides/risks-and-mitigations.md#plan-drift). The reasoning is in [HUMANS.md](../../HUMANS.md#project-lifecycle).
 
 This proposal explores how the principles and approaches outlined in the main guide can be translated into a project lifecycle.
 

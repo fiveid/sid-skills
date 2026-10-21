@@ -2,7 +2,7 @@
 
 *The principle behind this guide is in [HUMANS.md](../../HUMANS.md#parallel-development).*
 
-Sitting and waiting for an agent to finish its task, just to click approve and then wait for the next job to finish, leads to developer fatigue. It can kill motivation and productivity, while still introducing the same risks detailed in [HUMANS.md](../../HUMANS.md#risks).
+Sitting and waiting for an agent to finish its task, just to click approve and then wait for the next job to finish, leads to developer fatigue. It can kill motivation and productivity, while still introducing the same risks detailed in [Risks and mitigations](risks-and-mitigations.md).
 
 I've found working with AI more rewarding and engaging when running agents in parallel. However, as tempting as it is to open a session for each ticket in the sprint and just let them go at it, this will lead to a review bottleneck up ahead, and difficult context switching as your attention hops between potentially dozens of agents asking questions.
 

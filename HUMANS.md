@@ -66,42 +66,11 @@ AI chats are a poor substitute for proper organisation. Used carelessly, chats s
 
 Start any chat with an end goal in mind. Agent sessions are ephemeral and should be considered fragile. Every chat or agent session should conclude with something left behind. Something that can be moved or exists outside the session chat, e.g. something to copy and paste into your notes, a report, a commit, a merge request, etc.
 
-## **Risks**
+## **Risks and mitigations**
 
-* **The planning doom spiral.** Over-planning adds a docs burden and risks anchoring AI to outdated or unwanted specs.  
-* **Plan drift.** AI can write flawless-sounding plans with no real-world experience. Tiny, plausible assumptions slip in, reviewers skim and approve, those mistakes become gospel.  
-* **Architectural drift.** Minor, individually harmless aberrations in PRs pass CI and manual review, but risk adding up to architectural fragmentation.  
-* **Review fatigue and automation bias.** Reviewers inevitably default to skim-reading high-volume AI code.   
-* **Issue abundance.** AI code reviews produce long lists of bugs and improvements, some of which are overstated or incorrect. Triaging the list can cost as much as reviewing the code, and adds further noise.  
-* **The human** **bottleneck.** Babysitting a single agent is tedious and limiting. But juggling multiple agents brings its own problems when human review is the real bottleneck.  
-* **Secrets exposure.** Agents pull secrets (ssh keys, MCP tokens, environment variables) into context. Prompt injection can exfiltrate secrets.  
-* **New** **attack vectors.** Prompt injection and slopsquatting (malicious packages using commonly hallucinated package names) are just two of the ways bad actors are exploiting agent behaviour. 
+The principles above are deliberately general. The specific risks I've run into, from plan drift to issue abundance, and what has helped with each, are collected in one guide.
 
-## **Mitigation**
-
-* **Planning and context**  
-  * Humans own the *what* and the *why*. Agents can help with the *how* of a single, bounded task.  
-  * **Keep plans disposable, keep invariants permanent.** Bin the task plan once it's merged; keep a short README per domain with the rules that actually matter.  
-  * **Architectural boundaries.** Giving an agent one bounded domain limits hallucination and keeps dependencies contained.   
-  * **Don't let agents write the strategy.** They're great at challenging a plan, but the roadmap and priorities stay with the human.  
-  * **Audit any plan an agent proposes.** Look specifically for unstated dependencies, speculative abstractions and quiet scope creep. Maybe even get a second, *human* opinion.  
-  * **Set up shared foundations early.** Set up workspace packages with hard boundaries early (e.g. Turborepo monorepo with a shared packages/ui).   
-* **Reviewing AI code**  
-  * **Predict the diff first.** Know roughly what the change should look like before opening it, then look for what doesn't fit.  
-  * **Keep PRs small and single purpose.**  
-  * **Ask for evidence, not explanations.** Test output or a curl command beats an AI-written essay.  
-  * **Add "manual review tasks" to PR checklist.**  
-  * **Use AI review for targeted questions, not open-ended trawls.** "Find every query inside a loop" gets a better answer than "review this PR".  
-  * **Watch out for test theatre.** Left alone, agents mock everything and assert the mock was called. All green, proving nothing.  
-  * **Gate dependencies and commits.** New dependencies need a human sign-off. Run gitleaks or trufflehog in pre-commit hooks and CI to catch leaked tokens.  
-* **Throughput**  
-  * Generation is nearly free; review isn't. **Plan capacity around how much a person can properly review**, not how much an agent can produce.  
-  * **Slow down to speed up.** Stop. Take a breath. Wait.  
-  * **Optimise codebase for parallel development**. See below.
-* **Security**
-  * **Instructions are suggestions**. For reliability we need hard enforcement: sandboxes, permissions and CI checks that fail loudly  
-  * **Sandboxed by default** see [Sandboxing](docs/proposals/sandboxing.md).  
-  * **No real secrets in the agent’s environment.**
+→ **Guide:** [Risks and mitigations](docs/guides/risks-and-mitigations.md): eight risks, each paired with practical mitigations.
 
 ## **Rules of thumb**
 

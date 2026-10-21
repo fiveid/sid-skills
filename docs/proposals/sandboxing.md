@@ -1,7 +1,7 @@
 # **Sandboxing**
 
 **Status:** Proposal. My leaning is sandboxed by default. Needs a team decision on enforcement and tier.  
-**Responds to:** [secrets exposure and new attack vectors](../../HUMANS.md#risks).
+**Responds to:** [secrets exposure](../guides/risks-and-mitigations.md#secrets-exposure) and [new attack vectors](../guides/risks-and-mitigations.md#new-attack-vectors).
 
 Sandboxing a project ensures an agent cannot reach outside the scope of the project to reach system settings and trawl keys from other directories. An egress allowlist can limit what external hosts an agent would be able to connect to. It can also isolate SSH keys and CLI tokens. We may want to adopt a sandboxing approach as standard. There are options:
 

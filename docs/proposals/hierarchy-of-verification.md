@@ -1,7 +1,7 @@
 # **Hierarchy of verification**
 
 **Status:** Proposal. A way of dividing review responsibility; not yet agreed as a team.  
-**Responds to:** [review fatigue and automation bias](../../HUMANS.md#risks). The reasoning is in [HUMANS.md](../../HUMANS.md#hierarchy-of-verification).
+**Responds to:** [review fatigue and automation bias](../guides/risks-and-mitigations.md#review-fatigue-and-automation-bias). The reasoning is in [HUMANS.md](../../HUMANS.md#hierarchy-of-verification).
 
 Push everything mechanical (formatting, types, recurring drift) into tooling, so human attention goes on what tooling can't judge: whether it actually works, the plan and scope, and what we build and why.
 

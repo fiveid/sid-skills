@@ -8,13 +8,13 @@ A personal collection of practical guidelines, workflows, and reusable skills fo
 
 The guiding principles: real-world reflections on working with AI coding agents, focusing on the human bottleneck. Where attention is best spent, how to fight review fatigue, and how to stay in control of the codebase.
 
-- **Risks & Mitigations**: Planning spirals, plan drift, review fatigue, and gating dependencies
-- **Principles**: Parallel development, secrets, project lifecycle, where to spend review attention, and testing
+- **A collaborative culture**: Seven principles for working with agents, from owning the product to keeping your thinking out of the chat
 - **Rules of thumb**: Trust your gut, know when to stop prompting, own what you merge
+- **Focus areas**: Parallel development, secrets, project lifecycle, where to spend review attention, and testing
 
 The concrete, actionable side lives in `docs/`:
 
-- **[Guides](docs/guides/README.md)**: Practices I use and have found worth keeping (parallel worktrees, secrets, testing with confidence)
+- **[Guides](docs/guides/README.md)**: Practices I use and have found worth keeping (risks and mitigations, parallel worktrees, secrets, testing with confidence)
 - **[Proposals](docs/proposals/README.md)**: Frameworks and team decisions still being tested (project lifecycle, hierarchy of verification, sandboxing tiers)
 
 ---
