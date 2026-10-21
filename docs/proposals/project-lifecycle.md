@@ -3,7 +3,19 @@
 **Status:** Proposal. The phases reflect my own projects so far; the checkpoint lists are examples, not yet used as a formal gate.  
 **Responds to:** [architectural drift and plan drift](../../HUMANS.md#risks). The reasoning is in [HUMANS.md](../../HUMANS.md#project-lifecycle).
 
-This proposal sets out one approach to managing the full project lifecycle when working with agents.
+This proposal explores how the principles and approaches outlined in the main guide can be translated into a project lifecycle.
+
+The primary concern here is the human bottleneck. We can frontload human review efforts, we can do routine or ad hoc reviews, or we can defer to the end. Regardless, the bill comes due.
+
+With that in mind, we might then consider some repayment options:
+
+- **Pay-as-you-go:** Modular gating; non-negotiable for load-bearing invariants.
+- **Tranche checkpoints:** Sprinting through bounded feature sets, then freezing the workspace to settle the debt before moving on.
+- **The balloon payment:** Zero review upfront; your users do the reviewing.
+
+The reality is we might incorporate different repayment options in one project.
+
+Here I propose a checkpoints approach and how a project may transition from one mode to another.
 
 ## Phases and checkpoints
 

@@ -1,10 +1,70 @@
 # **Human Guidelines for AI Development**
 
-*This document is a write-up of what I have learned so far from using AI agents for development. Do not treat the recommendations within as authoritative. These are purely based on my own subjective experience.* 
+AI makes writing code cheap. It doesn't make reviewing, understanding or owning that code any cheaper.
 
-AI makes writing code cheap. It doesn't make reviewing, understanding or owning that code any cheaper. Almost everything in this guide follows from that.
+This guide is for humans who are building software with AI. It is based on the following assumptions:
 
-The key assumption here is that human involvement is necessary, but human attention is finite.
+- When used effectively, AI can increase productivity without sacrificing quality.
+- Human involvement is necessary; human attention is finite.
+
+## **A collaborative culture**
+
+If you have ever worked as part of a team, you know the importance of a _working culture_. In brief, we can define it as a shared understanding that encourages collaboration and ensures everyone is pulling in the same direction.
+
+Working with agents requires a similar culture. When working with AI, you may be the only human in the team. This means it's up to you to make sure you and your agents work effectively within the culture you've established.
+
+> [!NOTE]
+> Remember, each agent session is effectively a new worker. Enabling new agents to seamlessly onboard is part of the process.
+
+A culture is not a detailed 200-file spec. It's not a plugin that can be installed in a harness. It's not a prompt engineering trick.
+
+We can't simply map software engineering culture onto AI development either (although we can learn from software engineering best practices). The culture I'm proposing emerges from a set of basic principles from which all else follows:
+
+- **YOU own the product**
+- **The bill comes due. Always**
+- **You don't need to know every line of code written, but you need to know _how_ to know**
+- **Code is the source of truth**
+- **What _should_ be read _will_ be skimmed**
+- **Instructions are suggestions**
+- **Don’t leave your thinking in the chat**
+
+### YOU own the product
+
+Ask an AI to plan a wedding and it'll write the most detailed and confident-sounding plan you've ever seen. But the AI has never planned a wedding before. An AI has never even been to a wedding.
+
+As impressive as LLMs are, they have limits that you do not. YOU are the strategy, the taste, the continuity. You set the quality floor. The repo holds the state. The AI holds the immediate, disposable context window.
+
+### The bill comes due. Always
+
+Human review is the inevitable bottleneck, whether you factor that in up front or wait to test on your unfortunate users. You can do one of three things with review cost: move it, shrink it, or write it off. What you cannot do is ignore it and keep the code.
+
+Plan capacity around human review bandwidth, not machine generation capacity.
+
+### You don't need to know every line of code written, but you need to know _how_ to know
+
+Your codebase is a dark house. If you were dropped into a random room with a weak flashlight, could you find your way around? An encyclopedic knowledge of every nail used in construction isn't needed, but a familiarity with the layout and furnishings (and lightswitches) would avoid some bruises. If you keep walking into furniture, the layout is wrong, not your memory.
+
+Aim for code that is skimmable, predictable, human-readable. Prefer convention over specification, predictable patterns over clever abstractions, familiarity over novelty. Define boundaries through architecture, not instructions.
+
+Whether your primary interface is code, text, or diagrams, possess a mental model of the product and know how to spot red flags.
+
+### Code is the source of truth
+
+The behaviour is the behaviour. Regardless of what is written in the spec, or what sits in your mind, ultimately the code is the source of truth. Docs grow stale. Memories erode. When all else fades, the code remains.
+
+### What _should_ be read _will_ be skimmed
+
+**Nobody** reads every word of generated AI output. Any strategy or workflow that assumes otherwise will fail. Assume what is written will, at most, be skim-read. Plan around human attention, not AI verbosity.
+
+### Instructions are suggestions
+
+Prompts are advisory. Context is guidance. Adherence is not guaranteed. Only mechanically enforced constraints can be trusted.
+
+### Don’t leave your thinking in the chat
+
+AI chats are a poor substitute for proper organisation. Used carelessly, chats scatter your thinking across a dozen brains that forget it the moment you close the tab. Any concrete progress will as good as lost.
+
+Start any chat with an end goal in mind. Agent sessions are ephemeral and should be considered fragile. Every chat or agent session should conclude with something left behind. Something that can be moved or exists outside the session chat, e.g. something to copy and paste into your notes, a report, a commit, a merge request, etc.
 
 ## **Risks**
 
@@ -23,7 +83,7 @@ The key assumption here is that human involvement is necessary, but human attent
   * Humans own the *what* and the *why*. Agents can help with the *how* of a single, bounded task.  
   * **Keep plans disposable, keep invariants permanent.** Bin the task plan once it's merged; keep a short README per domain with the rules that actually matter.  
   * **Architectural boundaries.** Giving an agent one bounded domain limits hallucination and keeps dependencies contained.   
-  * **Don't let agents write the strategy.** They're great at challenging a plan, but the roadmap and priorities stay with us.  
+  * **Don't let agents write the strategy.** They're great at challenging a plan, but the roadmap and priorities stay with the human.  
   * **Audit any plan an agent proposes.** Look specifically for unstated dependencies, speculative abstractions and quiet scope creep. Maybe even get a second, *human* opinion.  
   * **Set up shared foundations early.** Set up workspace packages with hard boundaries early (e.g. Turborepo monorepo with a shared packages/ui).   
 * **Reviewing AI code**  
@@ -40,7 +100,7 @@ The key assumption here is that human involvement is necessary, but human attent
   * **Optimise codebase for parallel development**. See below.
 * **Security**
   * **Instructions are suggestions**. For reliability we need hard enforcement: sandboxes, permissions and CI checks that fail loudly  
-  * **Sandboxed by default**. Something we need to decide as a team: whether to enforce it, and which tier (see [Sandboxing](docs/proposals/sandboxing.md)).  
+  * **Sandboxed by default** see [Sandboxing](docs/proposals/sandboxing.md).  
   * **No real secrets in the agent’s environment.**
 
 ## **Rules of thumb**
@@ -72,9 +132,9 @@ Sandboxed by default seems the best option. In the Sandboxing proposal I explore
 
 Projects are not all alike, and in my experience, the problems faced by a greenfield codebase are different from those of a mature codebase. We can talk about "small PRs only, limited to specific domains", but, realistically, new projects will kick off with large PRs and changes that cross multiple domains.
 
-Strict rules kill speed early on, and loose rules create a mess later. The aim is not to force one way or another, but to transition securely and with confidence from a fast-moving, emerging codebase, to a mature, stable one.
+Strict rules kill speed early on, and loose rules create a mess later. **We can move the human-review bottleneck but we cannot avoid it.** The aim is not to force one way or another, but to transition securely and with confidence from a fast-moving, emerging codebase, to a mature, stable one.
 
-Even with hobby projects, I’ve found that getting to 80-90% feature-complete with AI is easy. Getting to 100% starts to feel a lot more like old-fashioned software engineering. Reaching production ready on top of that is another big step that requires genuine domain knowledge and experience.
+Even with hobby projects, I’ve found that getting to a (seemingly) "feature-complete" state with AI is easy. Getting it "production ready" starts to feel a lot more like old-fashioned software engineering, requiring human-led planning, genuine domain knowledge and experience.
 
 The Project Lifecycle proposal sets out one approach to managing AI development projects.
 
