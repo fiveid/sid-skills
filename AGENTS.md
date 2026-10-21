@@ -17,10 +17,13 @@ Read this document before writing or modifying any guidelines, documentation, or
 
 ## 2. Tone of Voice
 
-- **Non-prescriptive & non-authoritative**: Do not speak as an absolute authority or declare "industry best practices". Use language like *"in my experience"*, *"a pattern that has worked well"*, *"friction I have observed"*, *"rules of thumb"*.
+- **Direct, not authoritative**: This is a public repo for anyone building software with AI. State principles plainly and with conviction; drop hedges like *"it might be worth considering"*. Direct is not the same as authoritative: do not declare "industry best practice" or claim more certainty than the evidence supports.
+- **Grounded in experience**: The content comes from real projects. Where a claim rests on personal experience rather than wider evidence, say so once (*"in my projects"*), not in every sentence. Proposals carry a **Status** line for this.
+- **Not judgemental**: Describe what an approach costs and who pays, rather than calling it wrong. Do not assume the reader already works this way; many are starting from more basic problems.
 - **Pragmatic & honest**: Be candid about trade-offs, limitations, and failure modes. Acknowledge when something is tedious, brittle, or requires a human gut check.
+- **Accurate before memorable**: A catchy name, analogy or "law" is welcome only if the claim behind it holds. Stick to one metaphor per idea.
 - **Evolving & iterative**: The content shifts as models and developer tooling change. Avoid over-formalizing ideas before they are tested in real workflows.
-- **Terse and direct**: Favour short, high-signal paragraphs over corporate fluff or long-winded essays.
+- **Terse**: Favour short, high-signal paragraphs over corporate fluff or long-winded essays.
 
 ---
 
