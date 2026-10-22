@@ -14,8 +14,8 @@ The guiding principles: real-world reflections on working with AI coding agents,
 
 The concrete, actionable side lives in `docs/`:
 
-- **[Guides](docs/guides/README.md)**: Practices I use and have found worth keeping (risks and mitigations, parallel worktrees, secrets, testing with confidence)
-- **[Proposals](docs/proposals/README.md)**: Frameworks and team decisions still being tested (project lifecycle, hierarchy of verification, sandboxing tiers)
+- **[Guides](docs/guides/README.md)**: Practices I use and have found worth keeping (risks and mitigations, parallel worktrees, secrets, Docker Sandboxes, testing with confidence)
+- **[Proposals](docs/proposals/README.md)**: Frameworks and team decisions still being tested (project lifecycle, hierarchy of verification, sandboxing levels)
 
 ---
 

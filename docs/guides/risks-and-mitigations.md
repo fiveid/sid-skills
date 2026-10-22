@@ -69,6 +69,7 @@ Agents pull secrets (ssh keys, MCP tokens, environment variables) into context. 
 * **Scan commits for secrets.** Run gitleaks or trufflehog in pre-commit hooks and CI to catch leaked tokens.
 
 → **Guide:** [Secrets in the agent's environment](secrets.md)  
+→ **Guide:** [Docker Sandboxes](docker-sandboxes.md)  
 → **Proposal:** [Sandboxing](../proposals/sandboxing.md)
 
 ## **New attack vectors**
@@ -76,6 +77,6 @@ Agents pull secrets (ssh keys, MCP tokens, environment variables) into context. 
 Prompt injection and slopsquatting (malicious packages using commonly hallucinated package names) are just two of the ways bad actors are exploiting agent behaviour.
 
 * **Gate dependencies.** New dependencies need a human sign-off. *Example skill (npm):* [`sid-dep-audit`](../../skills/sid-dep-audit/SKILL.md).
-* **Sandboxed by default.** Which tier is a trade-off, explored in the proposal below.
+* **Sandboxed by default.** Which level is a trade-off, explored in the proposal below.
 
 → **Proposal:** [Sandboxing](../proposals/sandboxing.md)

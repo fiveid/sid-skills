@@ -94,8 +94,9 @@ The key takeaway for secrets is to **assume anything the agent can read, it will
 
 Sandboxed by default seems the best option. In the Sandboxing proposal I explore and compare options.
 
-→ **Guide:** [Secrets in the agent's environment](docs/guides/secrets.md): practical notes on SSH keys, MCP tokens and permission rules.  
-→ **Proposal:** [Sandboxing](docs/proposals/sandboxing.md): three tiers of isolation, and the trade-offs a team would need to decide between.
+→ **Guide:** [Secrets in the agent's environment](docs/guides/secrets.md): three questions to ask of every secret, where secrets hide, and 1Password tools (including its MCP).  
+→ **Guide:** [Docker Sandboxes](docs/guides/docker-sandboxes.md): pointers for running Claude Code in a Docker sandbox, with secrets swapped in by its proxy.  
+→ **Proposal:** [Sandboxing](docs/proposals/sandboxing.md): three levels of isolation, from shell commands only to the whole agent on its own copy of the project.
 
 ## **Project lifecycle**
 
