@@ -70,7 +70,7 @@ A `skills-lock.json` file is committed to track third-party skill dependencies.
 | [`sid-summarise-activity`](./sid-summarise-activity/SKILL.md) | Summarises sprint commits and PRs for timesheets and standups. |
 | [`sid-test`](./sid-test/SKILL.md) | Behaviour-driven test authoring using shared helpers and edge mocks. |
 | [`sid-test-review`](./sid-test-review/SKILL.md) | Sceptical review of test suites to catch fake coverage and weakened assertions. |
-| [`sid-trust-audit`](./sid-trust-audit/SKILL.md) | Audit an agent-built project's safeguards by breaking them on purpose, labelling each as enforced, unenforced or convention. |
+| [`sid-trust-audit`](./sid-trust-audit/SKILL.md) | Audit an agent-built project's safeguards by breaking them on purpose, labelling each as enforced, unenforced, convention or owner-checked. |
 
 ---
 

@@ -13,9 +13,10 @@ Labels used throughout:
 - **Enforced:** a tool fails a run, and the failure blocks something.
 - **Exists, not enforced:** the check exists, but someone has to run it, or its failure blocks nothing.
 - **Convention:** a written rule nothing checks.
+- **Owner-checked:** the owner checks this behaviour on purpose, at a known point (owner's own description).
 
 ## 1. Overview
-What it is · stack (table) · size (table) · how it was built (commits, agent trailers, PRs, reviews) · what the owner reads and doesn't · what the owner does by hand (owner's own description) · how code reaches users and what gates it.
+What it is · stack (table) · size (table) · how it was built (commits, agent trailers, PRs, reviews) · what the owner reads and doesn't · what the owner does by hand (owner's own description) · how code reaches users and what gates it · experiment or keeper, and whether there's real data yet (owner's own description).
 
 ## 2. Risk profile
 Table: # · failure · where it would happen · who notices, and when. One line on where the risky code sits relative to what the owner reads.
@@ -29,17 +30,17 @@ Table: # · violation · rule it breaks · expected catch · result. Then one li
 Table: check · where · label.
 **What runs, and when:** CI triggers, what gates release or deploy, whether `main` is protected, whether the agent's verify routine is complete.
 ### Layer 2: checkpoints
-Table: trigger · what exists · label. Whether anything triggers checkpoints mechanically, and whether they leave a record.
+Table: trigger · what the owner does or what exists · label. Whether anything triggers checkpoints mechanically.
 ### Layer 3: milestones
 Feature complete: where defined, open items, "not in this version" list. Production ready: table of item · state · evidence.
 ### Claims
 Table: claim · where it's made · what backs it (test / prose / nothing).
 
-## 4. Human checkpoints
-Table: what · where · size · can the owner realistically check it? Note which ones flag their own changes.
+## 4. Who catches what
+Table: top risk · owner's own checking · automated check (drill V<n>) · verdict (owner / check / both / neither). Every "neither" appears under Gaps.
 
 ## 5. Gaps
-Ordered by risk. Bold one-line summary, then evidence. "It seems to work when used" and "unproven, not absent" are acceptable verdicts.
+Ordered by risk. Bold one-line summary, then evidence. Owner-checked behaviour is coverage, not a gap. "Unproven, not absent" is an acceptable verdict.
 
 ## 6. Recommendations
 Table: # · change · closes · cost · proof it works (usually: re-run V<n>, it now fails). Then "Left out on purpose" with reasons.

@@ -37,7 +37,7 @@ Modular instruction sets conforming to the [Agent Skills specification](https://
 | [`sid-summarise-activity`](skills/sid-summarise-activity/SKILL.md) | Git commit and PR activity summariser for sprint reviews and timesheets. |
 | [`sid-test`](skills/sid-test/SKILL.md) | Behaviour-driven test authoring using shared render helpers and edge mocks. |
 | [`sid-test-review`](skills/sid-test-review/SKILL.md) | Sceptical test suite review looking for fake coverage and weakened assertions. |
-| [`sid-trust-audit`](skills/sid-trust-audit/SKILL.md) | Audit an agent-built project's safeguards by breaking them on purpose, labelling each as enforced, unenforced or convention. |
+| [`sid-trust-audit`](skills/sid-trust-audit/SKILL.md) | Audit an agent-built project's safeguards by breaking them on purpose, labelling each as enforced, unenforced, convention or owner-checked. |
 
 ### Quickstart
 

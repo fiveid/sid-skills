@@ -49,6 +49,8 @@ Record for each: the violation, the rule it breaks, what was expected to catch i
 - Add a required field to the stored format without bumping the version.
 - Make the loader treat a newer save as invalid, so it would be overwritten.
 
+If there's no real data yet and the owner keeps only the current shape on purpose, record the result but don't count it as a gap.
+
 **Rules from agent instructions:**
 
 - A hard-coded string where content should come from data.
