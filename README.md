@@ -32,6 +32,7 @@ Modular instruction sets conforming to the [Agent Skills specification](https://
 | [`sid-pii-check`](skills/sid-pii-check/SKILL.md) | Scan git changes and code for personal info, local paths, client names, and secrets. |
 | [`sid-plan-audit`](skills/sid-plan-audit/SKILL.md) | Sceptically distill implementation plans to expose implicit decisions, scope, and missing guardrails. |
 | [`sid-pr-prep`](skills/sid-pr-prep/SKILL.md) | Prepare concise, evidence-first pull request descriptions with manual review checklists. |
+| [`sid-quality-gate`](skills/sid-quality-gate/SKILL.md) | Set up a language-agnostic CI quality gate with a recorded baseline, then audit it later for loosened thresholds, new suppressions and CI bypasses. |
 | [`sid-review`](skills/sid-review/SKILL.md) | Opinionated frontend review targeting layout bugbears and common anti-patterns. |
 | [`sid-scout`](skills/sid-scout/SKILL.md) | Read-only codebase explorer that outputs a minimal context snapshot. |
 | [`sid-summarise-activity`](skills/sid-summarise-activity/SKILL.md) | Git commit and PR activity summariser for sprint reviews and timesheets. |

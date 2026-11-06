@@ -29,6 +29,7 @@ Minor, individually harmless aberrations in PRs pass CI and manual review, but r
 * **Architectural boundaries.** Giving an agent one bounded domain limits hallucination and keeps dependencies contained.
 * **Set up shared foundations early.** Set up workspace packages with hard boundaries early (e.g. Turborepo monorepo with a shared packages/ui).
 * **Keep PRs small and single purpose.**
+* **Make the quality gate a required check, and audit it.** Types, lint, complexity, duplication, dead code and security in one CI check that blocks the merge. Gates tend to loosen one exception at a time, so record the baseline and check it again later. *Example skill:* [`sid-quality-gate`](../../skills/sid-quality-gate/SKILL.md).
 
 → **Proposal:** [Project lifecycle](../proposals/project-lifecycle.md)
 

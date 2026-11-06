@@ -65,6 +65,7 @@ A `skills-lock.json` file is committed to track third-party skill dependencies.
 | [`sid-pii-check`](./sid-pii-check/SKILL.md) | Scan git changes and code for personal info, local paths, client names, and secrets. |
 | [`sid-plan-audit`](./sid-plan-audit/SKILL.md) | Sceptically distill implementation plans to expose implicit decisions, scope, and missing guardrails. |
 | [`sid-pr-prep`](./sid-pr-prep/SKILL.md) | Prepare concise, evidence-first pull request descriptions with manual review checklists. |
+| [`sid-quality-gate`](./sid-quality-gate/SKILL.md) | Set up a language-agnostic CI quality gate with a recorded baseline, then audit it later for loosened thresholds, new suppressions and CI bypasses. |
 | [`sid-review`](./sid-review/SKILL.md) | Opinionated frontend review focusing on layout, composition, and common anti-patterns. |
 | [`sid-scout`](./sid-scout/SKILL.md) | Read-only codebase explorer that outputs minimal context snapshots. |
 | [`sid-summarise-activity`](./sid-summarise-activity/SKILL.md) | Summarises sprint commits and PRs for timesheets and standups. |
