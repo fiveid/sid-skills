@@ -6,7 +6,7 @@ The gate is one command and one required CI check. Any change to a tool, thresho
 - **Run locally:** `scripts/quality.sh` (one category: `scripts/quality.sh <category>`)
 - **CI check:** `Code quality` in `.github/workflows/quality.yml`
 - **Required before merge:** not yet. Add a ruleset on `main` once the workflow has run there (steps below). Verified 2026-11-13.
-- **Run time:** about 12 s locally, about 1 min in CI (measured 2026-11-13). The hidden Unicode scan is 11 s of the local run. Scheduled rather than blocking: none.
+- **Run time:** about 12 s locally, about 45 s in CI (measured 2026-11-13). The hidden Unicode scan is 11 s of the local run. Scheduled rather than blocking: none.
 - **Local hooks:** a pre-commit secret scan of staged changes (`.githooks/pre-commit`), about 0.02 s per commit. Turn it on per clone with `git config core.hooksPath .githooks`. A convenience, not enforcement: hooks are per-clone and `--no-verify` skips them.
 
 ### Requiring the check
