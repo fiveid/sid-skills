@@ -5,11 +5,13 @@ The gate is one command and one required CI check. Any change to a tool, thresho
 - **Install the tools:** `scripts/install-tools.sh` (once, and again after a pin changes). Python tools go into `.venv`, binaries into `.tools/`. Both are gitignored.
 - **Run locally:** `scripts/quality.sh` (one category: `scripts/quality.sh <category>`)
 - **CI check:** `Code quality` in `.github/workflows/quality.yml`
-- **Required before merge:** not yet. Add a ruleset on `main` once the workflow has run there (steps below). Verified 2026-11-13.
+- **Required before merge:** yes, via the `main` ruleset (it also blocks deleting `main` and force-pushing to it, with no bypass actors). Verified 2026-11-13.
 - **Run time:** about 12 s locally, about 45 s in CI (measured 2026-11-13). The hidden Unicode scan is 11 s of the local run. Scheduled rather than blocking: none.
 - **Local hooks:** a pre-commit secret scan of staged changes (`.githooks/pre-commit`), about 0.02 s per commit. Turn it on per clone with `git config core.hooksPath .githooks`. A convenience, not enforcement: hooks are per-clone and `--no-verify` skips them.
 
 ### Requiring the check
+
+Done for this repo. The steps are kept for reference, for example if the ruleset is ever recreated.
 
 1. Merge the workflow and let it run on `main`, so `Code quality` appears in the check picker.
 2. **Settings → Rules → Rulesets → New branch ruleset.** Target `main`, enable **Require status checks to pass**, and add `Code quality`.
@@ -73,6 +75,11 @@ The two CI lines flagged are intended: `branches: [main]` limits push runs to `m
 ## Decisions log
 
 Newest first. Each entry: what changed, from what to what, why, and who asked.
+
+### 2026-11-13: Code quality required on main
+
+- Enforcement changed from not required to required: the owner added the `main` ruleset, targeting the default branch. It requires `Code quality` from GitHub Actions, blocks deletion and force pushes, and has no bypass actors.
+- Requested by the owner.
 
 ### 2026-11-13: Gate set up
 

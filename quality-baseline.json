@@ -11,9 +11,9 @@
       ".githooks/pre-commit"
     ],
     "enforcement": {
-      "status": "not-required",
+      "status": "required",
       "verified": "2026-11-13",
-      "how": "No ruleset or branch protection on main yet. The owner adds a ruleset requiring 'Code quality' once the workflow has run on main."
+      "how": "Ruleset 'main' (id 27220070) targets the default branch and requires 'Code quality' from GitHub Actions. It also blocks deletion and force pushes. No bypass actors."
     },
     "timing": {
       "local_seconds": 12,
