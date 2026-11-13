@@ -9,7 +9,7 @@
 # Thresholds and the reasons behind them live in the quality record (QUALITY.md by default).
 
 set -uo pipefail
-cd "$(dirname "$0")/.."
+cd "$(dirname "$0")/.." || exit 1
 
 ALL=(types lint complexity duplication deadcode security-code security-deps security-secrets tests formatting)
 

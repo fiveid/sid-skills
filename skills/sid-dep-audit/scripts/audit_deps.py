@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-audit_deps.py — Audit proposed or new dependencies for age-gating, slopsquatting, and trivial utilities.
+audit_deps.py - Audit proposed or new dependencies for age-gating, slopsquatting, and trivial
+utilities.
 
 Usage:
     python audit_deps.py [package-names ...]
@@ -8,16 +9,28 @@ Usage:
     python audit_deps.py --diff [package.json]
 """
 
+from __future__ import annotations
+
 import argparse
 import json
 import re
 import subprocess
-import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
+from typing import Any
 
 # Packages less than this many days old trigger an age warning
 AGE_THRESHOLD_DAYS = 30
+
+# A latest release younger than this many days suggests pinning the previous version
+RECENT_RELEASE_DAYS = 7
+
+DEPENDENCY_SECTIONS = ("dependencies", "devDependencies", "peerDependencies")
+
+# Matches added dependency lines in a diff: + "package-name": "version"
+ADDED_DEP_RE = re.compile(
+    r'^\+\s*"([@a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+|[a-zA-Z0-9_-]+)"\s*:', re.MULTILINE
+)
 
 # Common trivial micro-packages that should generally be written natively
 TRIVIAL_PACKAGES = {
@@ -37,34 +50,37 @@ TRIVIAL_PACKAGES = {
 }
 
 
-def get_npm_view(pkg: str) -> dict | None:
-    """Fetch package metadata using `npm view --json`."""
+def get_npm_view(pkg: str) -> Any:
+    """Fetch package metadata using `npm view --json`. Returns None if it can't be resolved."""
     try:
-        res = subprocess.run(["npm", "view", pkg, "--json"], capture_output=True, text=True, check=False)
-        if res.returncode == 0 and res.stdout.strip():
-            return json.loads(res.stdout)
-    except Exception:
-        pass
-    return None
+        res = subprocess.run(
+            ["npm", "view", pkg, "--json"], capture_output=True, text=True, check=False
+        )
+        if res.returncode != 0 or not res.stdout.strip():
+            return None
+        return json.loads(res.stdout)
+    except (OSError, ValueError):
+        return None
 
 
 def get_added_deps_from_diff(file_path: str = "package.json") -> list[str]:
     """Find newly added dependencies from git diff of package.json."""
-    added = []
     try:
-        res = subprocess.run(["git", "diff", "HEAD", "--", file_path], capture_output=True, text=True, check=False)
+        res = subprocess.run(
+            ["git", "diff", "HEAD", "--", file_path], capture_output=True, text=True, check=False
+        )
         if not res.stdout:
-            # Fall back to diff --cached or plain diff
-            res = subprocess.run(["git", "diff", "--cached", "--", file_path], capture_output=True, text=True, check=False)
-        
-        # Regex to match added dependency lines: + "package-name": "version"
-        dep_re = re.compile(r'^\+\s*"([@a-zA-Z0-9_-]+/[a-zA-Z0-9_-]+|[a-zA-Z0-9_-]+)"\s*:', re.MULTILINE)
-        for match in dep_re.findall(res.stdout):
-            if match not in ("dependencies", "devDependencies", "peerDependencies"):
-                added.append(match)
-    except Exception:
-        pass
-    return list(set(added))
+            # Fall back to the staged diff
+            res = subprocess.run(
+                ["git", "diff", "--cached", "--", file_path],
+                capture_output=True,
+                text=True,
+                check=False,
+            )
+    except OSError:
+        return []
+    added = {m for m in ADDED_DEP_RE.findall(res.stdout) if m not in DEPENDENCY_SECTIONS}
+    return list(added)
 
 
 def get_deps_from_file(file_path: str) -> list[str]:
@@ -74,57 +90,67 @@ def get_deps_from_file(file_path: str) -> list[str]:
         return []
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
-        deps = list(data.get("dependencies", {}).keys()) + list(data.get("devDependencies", {}).keys())
-        return deps
-    except Exception:
+    except (OSError, ValueError):
         return []
+    if not isinstance(data, dict):
+        return []
+    sections = [data.get("dependencies", {}), data.get("devDependencies", {})]
+    if not all(isinstance(section, dict) for section in sections):
+        return []
+    return [name for section in sections for name in section]
 
 
-def audit_package(pkg: str) -> dict:
+def days_since(timestamp: Any, now: datetime) -> int | None:
+    """Whole days between an ISO 8601 timestamp from npm and now, or None if it won't parse."""
+    if not timestamp:
+        return None
+    try:
+        then = datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
+        return (now - then).days
+    except (AttributeError, TypeError, ValueError):
+        return None
+
+
+def age_warnings(
+    latest_version: str, pkg_age_days: int | None, latest_release_days: int | None
+) -> list[str]:
+    if pkg_age_days is not None and pkg_age_days < AGE_THRESHOLD_DAYS:
+        return [
+            f"Package created only {pkg_age_days} days ago "
+            f"(Age gate threshold: {AGE_THRESHOLD_DAYS} days). High supply-chain risk."
+        ]
+    if latest_release_days is not None and latest_release_days < RECENT_RELEASE_DAYS:
+        return [
+            f"Latest version ({latest_version}) was published {latest_release_days} days ago. "
+            "Consider pinning to previous stable."
+        ]
+    return []
+
+
+def audit_package(pkg: str) -> dict[str, Any]:
+    is_trivial = pkg.lower() in TRIVIAL_PACKAGES
+    alternative = TRIVIAL_PACKAGES.get(pkg.lower())
     meta = get_npm_view(pkg)
     if not meta:
         return {
             "name": pkg,
             "status": "UNRESOLVED_OR_OFFLINE",
-            "warning": "Could not resolve package on npm registry. Check for spelling/hallucination.",
-            "is_trivial": pkg.lower() in TRIVIAL_PACKAGES,
-            "trivial_alternative": TRIVIAL_PACKAGES.get(pkg.lower()),
+            "warning": (
+                "Could not resolve package on npm registry. Check for spelling/hallucination."
+            ),
+            "is_trivial": is_trivial,
+            "trivial_alternative": alternative,
         }
 
-    # Extract creation date and latest publish date
+    # Creation date and latest publish date
     time_data = meta.get("time", {})
-    created_str = time_data.get("created")
     latest_version = meta.get("version", "")
-    latest_release_str = time_data.get(latest_version) or time_data.get("modified")
-
-    now = datetime.now(timezone.utc)
-    pkg_age_days = None
-    latest_release_days = None
-
-    if created_str:
-        try:
-            created_dt = datetime.fromisoformat(created_str.replace("Z", "+00:00"))
-            pkg_age_days = (now - created_dt).days
-        except Exception:
-            pass
-
-    if latest_release_str:
-        try:
-            rel_dt = datetime.fromisoformat(latest_release_str.replace("Z", "+00:00"))
-            latest_release_days = (now - rel_dt).days
-        except Exception:
-            pass
-
-    # Evaluate age warnings
-    warnings = []
-    if pkg_age_days is not None and pkg_age_days < AGE_THRESHOLD_DAYS:
-        warnings.append(f"Package created only {pkg_age_days} days ago (Age gate threshold: {AGE_THRESHOLD_DAYS} days). High supply-chain risk.")
-    elif latest_release_days is not None and latest_release_days < 7:
-        warnings.append(f"Latest version ({latest_version}) was published {latest_release_days} days ago. Consider pinning to previous stable.")
-
-    # Triviality check
-    is_trivial = pkg.lower() in TRIVIAL_PACKAGES
-    alternative = TRIVIAL_PACKAGES.get(pkg.lower())
+    now = datetime.now(UTC)
+    pkg_age_days = days_since(time_data.get("created"), now)
+    latest_release_days = days_since(
+        time_data.get(latest_version) or time_data.get("modified"), now
+    )
+    warnings = age_warnings(latest_version, pkg_age_days, latest_release_days)
 
     return {
         "name": pkg,
@@ -139,11 +165,15 @@ def audit_package(pkg: str) -> dict:
     }
 
 
-def main():
-    parser = argparse.ArgumentParser(description="Audit packages for age-gating, triviality, and supply-chain risk.")
+def main() -> None:
+    parser = argparse.ArgumentParser(
+        description="Audit packages for age-gating, triviality, and supply-chain risk."
+    )
     parser.add_argument("packages", nargs="*", help="Package names to audit.")
     parser.add_argument("--file", type=str, help="Path to package.json to audit.")
-    parser.add_argument("--diff", nargs="?", const="package.json", help="Scan newly added packages from git diff.")
+    parser.add_argument(
+        "--diff", nargs="?", const="package.json", help="Scan newly added packages from git diff."
+    )
 
     args = parser.parse_args()
 
@@ -158,7 +188,8 @@ def main():
         pkgs_to_check.update(get_added_deps_from_diff("package.json"))
 
     if not pkgs_to_check:
-        print(json.dumps({"audited": 0, "message": "No dependencies specified or found in diff."}, indent=2))
+        message = {"audited": 0, "message": "No dependencies specified or found in diff."}
+        print(json.dumps(message, indent=2))
         return
 
     results = [audit_package(p) for p in sorted(pkgs_to_check)]
