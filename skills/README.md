@@ -86,6 +86,25 @@ Project installs are recorded in `apm.yml` and `apm.lock.yaml` in the project yo
 
 ---
 
+## Versioning
+
+Releases are tagged `vMAJOR.MINOR.PATCH`, and the whole collection shares one version. Pin a tag rather than tracking `main`, so a skill only changes when you choose to update it:
+
+```bash
+npx skills add fiveid/sid-skills@v1.0.0 --skill sid-review
+apm install fiveid/sid-skills#v1.0.0 --skill sid-review
+```
+
+| Bump | When | Examples |
+| :--- | :--- | :--- |
+| **Major** | A skill is renamed or removed, or changes in a way that breaks how people use it | Renaming `sid-review`; changing the JSON a skill's script outputs |
+| **Minor** | A new skill, or a new capability in an existing one | Adding a skill; a new check in `sid-trust-audit` |
+| **Patch** | Fixes and tighter wording that don't change what a skill is for | Clarifying a step; fixing a script bug |
+
+Skills are instructions, so "breaks how people use it" is a judgement call: a reworded instruction can change what an agent does. When in doubt, bump minor and say what changed in the release notes. Each release on GitHub lists what changed.
+
+---
+
 ## Available Skills
 
 | Skill | Description |
