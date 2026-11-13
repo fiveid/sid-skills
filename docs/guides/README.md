@@ -5,6 +5,7 @@ Concrete setups and practices I use and have found worth keeping. Each one puts 
 | Guide | What it covers |
 | :--- | :--- |
 | [Docker Sandboxes](docker-sandboxes.md) | Running Claude Code in a Docker sandbox: SSH, desktop, editors, dependencies, and keeping secrets out with placeholders. |
+| [Managing and sharing skills](managing-and-sharing-skills.md) | Installing, pinning and publishing skills with skills.sh and APM, what to check first, and the gotchas. |
 | [Parallel development](parallel-development.md) | Running a handful of agent lanes in parallel worktrees without hitting a review bottleneck. |
 | [Risks and mitigations](risks-and-mitigations.md) | Eight risks when building with agents, each paired with practical mitigations. |
 | [Secrets in the agent's environment](secrets.md) | Three questions to ask of every secret, what to do once one has been exposed, where secrets hide, and 1Password tools (including its MCP). |
