@@ -128,6 +128,13 @@ def age_warnings(
 
 
 def audit_package(pkg: str) -> dict[str, Any]:
+    if pkg.startswith("-"):
+        # npm names can't start with "-", and npm would read one as an option (--registry=...)
+        return {
+            "name": pkg,
+            "status": "INVALID_NAME",
+            "warning": "Not a valid npm package name. Not passed to npm.",
+        }
     is_trivial = pkg.lower() in TRIVIAL_PACKAGES
     alternative = TRIVIAL_PACKAGES.get(pkg.lower())
     meta = get_npm_view(pkg)
