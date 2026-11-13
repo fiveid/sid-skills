@@ -8,4 +8,5 @@ Each proposal opens with a **Status** line saying how far it has been tried, and
 | :--- | :--- |
 | [Project lifecycle](project-lifecycle.md) | Three phases (discovery, buildout, production) with example checkpoints between them. |
 | [Hierarchy of verification](hierarchy-of-verification.md) | Five levels of review responsibility, from CI up to intent. |
+| [Project and personal skills](project-and-personal-skills.md) | Which skills to commit to a project, which to keep personal, and the bar for shared third-party skills. |
 | [Sandboxing](sandboxing.md) | Three levels of agent isolation, what each one changes, and overviews of Docker Sandboxes and nixenv. |

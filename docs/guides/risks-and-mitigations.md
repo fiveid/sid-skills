@@ -79,5 +79,8 @@ Prompt injection and slopsquatting (malicious packages using commonly hallucinat
 
 * **Gate dependencies.** New dependencies need a human sign-off. *Example skill (npm):* [`sid-dep-audit`](../../skills/sid-dep-audit/SKILL.md).
 * **Sandboxed by default.** Which level is a trade-off, explored in the proposal below.
+* **Treat skills as dependencies.** Read, pin and scan a skill before installing it, and commit only the ones the project needs.
 
-→ **Proposal:** [Sandboxing](../proposals/sandboxing.md)
+→ **Guide:** [Managing and sharing skills](managing-and-sharing-skills.md)  
+→ **Proposal:** [Sandboxing](../proposals/sandboxing.md)  
+→ **Proposal:** [Project and personal skills](../proposals/project-and-personal-skills.md)

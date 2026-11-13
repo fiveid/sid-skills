@@ -125,3 +125,12 @@ The aim is to increase confidence that tests are actually testing something. Age
 The testing guide recommends setting up shared foundations early so the agent doesn't roll its own mocks, deciding the behaviours under test before any code exists, and making the agent prove a test can fail.
 
 → **Guide:** [Testing with confidence](docs/guides/testing-with-confidence.md): project setup, what a testing skill should cover, prompting, and red flags when reviewing.
+
+## **Managing skills**
+
+Skills are instructions, and often scripts, that run with your agent's permissions. Treat them like dependencies: read them, pin them, scan them.
+
+Not every useful skill belongs in the project. Some skills the project needs; others are how I like to work, closer to editor extensions. Committing the second kind hands their cost to the whole team, so I keep them personal.
+
+→ **Guide:** [Managing and sharing skills](docs/guides/managing-and-sharing-skills.md): installing and sharing skills with skills.sh and APM.  
+→ **Proposal:** [Project and personal skills](docs/proposals/project-and-personal-skills.md): which skills to commit, which to keep personal, and the bar for shared third-party sets.
