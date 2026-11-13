@@ -1,0 +1,42 @@
+# Tool configuration for the code quality gate. Not a Python package.
+# Thresholds and the reasons behind them are recorded in QUALITY.md.
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+extend-exclude = [".agents", ".claude", ".tools", ".venv"]
+
+[tool.ruff.lint]
+select = [
+  "E", "W", "F", "I", "B", "UP", "SIM", "C4", "RUF", "PIE", "RET", "ARG", "PERF",
+  "BLE", "TRY", "DTZ", "ERA",
+  "PL",   # pylint rules, including the complexity limits below
+  "C90",  # cyclomatic complexity
+  "S",    # security (bandit)
+  "PLR1702",  # nesting depth: a preview rule, enabled on its own (see explicit-preview-rules)
+]
+preview = true
+explicit-preview-rules = true
+ignore = [
+  # The skill scripts shell out to git, gh and npm by name, with fixed argument lists and no
+  # shell. Resolving full paths would add nothing on a developer's machine.
+  "S603", "S607",
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 10
+
+[tool.ruff.lint.pylint]
+max-args = 4
+max-nested-blocks = 3
+max-statements = 50
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+files = ["skills/*/scripts/*.py", "scripts/*.py"]
+
+[tool.vulture]
+min_confidence = 60
+paths = ["skills", "scripts"]
