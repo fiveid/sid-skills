@@ -2,3 +2,7 @@
 .claude
 tmp/
 .DS_Store
+
+# Quality gate tools (scripts/install-tools.sh)
+.venv/
+.tools/

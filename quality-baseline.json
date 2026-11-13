@@ -1,0 +1,517 @@
+{
+  "schema_version": 1,
+  "record_doc": "QUALITY.md",
+  "gate": {
+    "command": "scripts/quality.sh",
+    "check_name": "Code quality",
+    "ci_workflow": ".github/workflows/quality.yml",
+    "files": [
+      "scripts/quality.sh",
+      ".github/workflows/quality.yml",
+      ".githooks/pre-commit"
+    ],
+    "enforcement": {
+      "status": "not-required",
+      "verified": "2026-11-13",
+      "how": "No ruleset or branch protection on main yet. The owner adds a ruleset requiring 'Code quality' once the workflow has run on main."
+    },
+    "timing": {
+      "local_seconds": 12,
+      "ci_minutes_estimate": 1,
+      "measured": "2026-11-13",
+      "scheduled_categories": []
+    },
+    "local_hooks": [
+      {
+        "hook": "pre-commit",
+        "category": "security_secrets",
+        "manager": "git core.hooksPath",
+        "config_file": ".githooks/pre-commit",
+        "seconds_per_commit": 0.02
+      }
+    ]
+  },
+  "categories": {
+    "types": {
+      "tool": "mypy",
+      "version": "2.4.1",
+      "config_files": [
+        "pyproject.toml"
+      ],
+      "settings": {
+        "strict": true,
+        "warn_unused_ignores": true,
+        "python_version": "3.11"
+      },
+      "thresholds": {},
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    },
+    "lint": {
+      "tool": "ruff",
+      "version": "0.17.3",
+      "config_files": [
+        "pyproject.toml"
+      ],
+      "settings": {
+        "select": [
+          "E",
+          "W",
+          "F",
+          "I",
+          "B",
+          "UP",
+          "SIM",
+          "C4",
+          "RUF",
+          "PIE",
+          "RET",
+          "ARG",
+          "PERF",
+          "BLE",
+          "TRY",
+          "DTZ",
+          "ERA",
+          "PL",
+          "C90",
+          "S",
+          "PLR1702"
+        ],
+        "ignore": [
+          "S603",
+          "S607"
+        ],
+        "line_length": 100
+      },
+      "thresholds": {},
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    },
+    "complexity": {
+      "tool": "ruff",
+      "version": "0.17.3",
+      "config_files": [
+        "pyproject.toml"
+      ],
+      "settings": {
+        "rules": [
+          "C901",
+          "PLR0911",
+          "PLR0912",
+          "PLR0913",
+          "PLR0915",
+          "PLR0917",
+          "PLR1702"
+        ]
+      },
+      "thresholds": {
+        "cyclomatic": 10,
+        "params": 4,
+        "depth": 3,
+        "statements": 50,
+        "branches": 12,
+        "returns": 6
+      },
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    },
+    "dead_code": {
+      "tool": "vulture",
+      "version": "2.16",
+      "config_files": [
+        "pyproject.toml"
+      ],
+      "settings": {
+        "min_confidence": 60
+      },
+      "thresholds": {},
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    },
+    "security_code": {
+      "tool": "ruff",
+      "version": "0.17.3",
+      "config_files": [
+        "pyproject.toml"
+      ],
+      "settings": {
+        "rules": [
+          "S"
+        ],
+        "ignore": [
+          "S603",
+          "S607"
+        ]
+      },
+      "thresholds": {},
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    },
+    "security_secrets": {
+      "tool": "betterleaks",
+      "version": "1.9.0",
+      "config_files": [],
+      "settings": {
+        "ci_scope": "the PR's commits, or the pushed commits",
+        "local_scope": "full history"
+      },
+      "thresholds": {
+        "fail_on": "any finding"
+      },
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    },
+    "formatting": {
+      "tool": "ruff format",
+      "version": "0.17.3",
+      "config_files": [
+        "pyproject.toml"
+      ],
+      "settings": {
+        "line_length": 100
+      },
+      "thresholds": {},
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    },
+    "shell": {
+      "tool": "shellcheck (shellcheck-py)",
+      "version": "0.11.0.1",
+      "config_files": [],
+      "settings": {
+        "severity": "style"
+      },
+      "thresholds": {},
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    },
+    "workflows": {
+      "tool": "zizmor",
+      "version": "1.31.1",
+      "config_files": [],
+      "settings": {
+        "offline": true,
+        "persona": "regular"
+      },
+      "thresholds": {},
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    },
+    "skills": {
+      "tool": "scripts/check_skills.py",
+      "version": "in repo",
+      "config_files": [
+        "scripts/check_skills.py"
+      ],
+      "settings": {
+        "checks": [
+          "frontmatter name, description and ASCII",
+          "catalogues list every skill exactly once"
+        ]
+      },
+      "thresholds": {
+        "name_max": 64,
+        "description_max": 1024
+      },
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    },
+    "unicode": {
+      "tool": "apm audit --file",
+      "version": "0.35.0",
+      "config_files": [],
+      "settings": {
+        "scope": "every tracked file under skills/"
+      },
+      "thresholds": {
+        "fail_on": "critical and warning"
+      },
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    },
+    "links": {
+      "tool": "lychee",
+      "version": "0.24.2",
+      "config_files": [],
+      "settings": {
+        "offline": true,
+        "include_fragments": true,
+        "scope": "every tracked Markdown file"
+      },
+      "thresholds": {},
+      "baseline_file": null,
+      "exclusions": [],
+      "runs_in": null
+    }
+  },
+  "excluded_categories": [
+    {
+      "category": "duplication",
+      "scope": "all",
+      "reason": "Each skill must be self-contained, so its scripts can't share code. The fix a duplication check pushes towards isn't available.",
+      "date": "2026-11-13",
+      "decided_by": "owner"
+    },
+    {
+      "category": "security_dependencies",
+      "scope": "all",
+      "reason": "The skill scripts use the Python standard library only. The gate's own tools are pinned by hash (requirements-quality.txt) or by SHA-256 (scripts/install-tools.sh), and reviewed when a pin changes.",
+      "date": "2026-11-13",
+      "decided_by": "owner"
+    },
+    {
+      "category": "tests",
+      "scope": "all",
+      "reason": "No tests yet. Target: tests for scan_pii.py and quality_snapshot.py before v1.1.0, then a coverage floor at the measured value.",
+      "date": "2026-11-13",
+      "decided_by": "owner"
+    }
+  ],
+  "watched_files": [
+    "pyproject.toml",
+    "requirements-quality.in",
+    "requirements-quality.txt",
+    "scripts/install-tools.sh",
+    "scripts/check_skills.py",
+    ".gitignore"
+  ],
+  "scan_exclude": [
+    ".agents/**",
+    ".claude/**",
+    "**/node_modules/**",
+    "vendor/**",
+    "**/*.min.js"
+  ],
+  "extra_baseline_files": {
+    "pyproject.toml": {
+      "method": "json-path",
+      "path": "tool.ruff.lint.ignore",
+      "label": "ruff ignored rules"
+    }
+  },
+  "extra_markers": [],
+  "measured": {
+    "date": "2026-11-13",
+    "commit": "bbafb8d00aaf065020b70677860df967813f2880",
+    "scan_exclude": [
+      ".agents/**",
+      ".claude/**",
+      "**/node_modules/**",
+      "vendor/**",
+      "**/*.min.js"
+    ],
+    "suppressions": {
+      "total": 35,
+      "explained": 4,
+      "unexplained": 31,
+      "file_or_block_scope": 10,
+      "by_category": {
+        "coverage": {
+          "total": 3,
+          "explained": 1,
+          "unexplained": 2
+        },
+        "duplication": {
+          "total": 2,
+          "explained": 2,
+          "unexplained": 0
+        },
+        "formatting": {
+          "total": 4,
+          "explained": 1,
+          "unexplained": 3
+        },
+        "lint": {
+          "total": 17,
+          "explained": 0,
+          "unexplained": 17
+        },
+        "security": {
+          "total": 4,
+          "explained": 0,
+          "unexplained": 4
+        },
+        "types": {
+          "total": 5,
+          "explained": 0,
+          "unexplained": 5
+        }
+      },
+      "by_file": {
+        "skills/sid-quality-gate/scripts/quality_snapshot.py": {
+          "types:@ts-nocheck": {
+            "total": 1,
+            "explained": 0
+          },
+          "types:@ts-ignore": {
+            "total": 1,
+            "explained": 0
+          },
+          "types:@ts-expect-error": {
+            "total": 1,
+            "explained": 0
+          },
+          "types:@phpstan-ignore(?:-next-line|-line)?": {
+            "total": 1,
+            "explained": 0
+          },
+          "types:@psalm-suppress": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:eslint-disable-next-line": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:eslint-disable-line": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:eslint-disable(?![-\\w])": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:oxlint-disable-next-line": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:oxlint-disable-line": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:oxlint-disable(?![-\\w])": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:biome-ignore-all": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:biome-ignore-start": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:biome-ignore(?![-\\w])": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:deno-lint-ignore-file": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:deno-lint-ignore(?![-\\w])": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:\\bnoqa\\b": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:rubocop:disable": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:standard:disable": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:@phpcsSuppress": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:@SuppressWarnings": {
+            "total": 1,
+            "explained": 0
+          },
+          "lint:\\[SuppressMessage": {
+            "total": 1,
+            "explained": 0
+          },
+          "coverage:@codeCoverageIgnore": {
+            "total": 1,
+            "explained": 0
+          },
+          "coverage:LCOV_EXCL": {
+            "total": 1,
+            "explained": 0
+          },
+          "coverage::nocov:": {
+            "total": 1,
+            "explained": 1
+          },
+          "duplication:jscpd:ignore-start": {
+            "total": 1,
+            "explained": 1
+          },
+          "duplication:CPD-OFF": {
+            "total": 1,
+            "explained": 1
+          },
+          "security:gitleaks:allow": {
+            "total": 1,
+            "explained": 0
+          },
+          "security:trufflehog:ignore": {
+            "total": 1,
+            "explained": 0
+          },
+          "security:checkov:skip": {
+            "total": 1,
+            "explained": 0
+          },
+          "security:trivy:ignore": {
+            "total": 1,
+            "explained": 0
+          },
+          "formatting:prettier-ignore": {
+            "total": 1,
+            "explained": 0
+          },
+          "formatting:dprint-ignore": {
+            "total": 1,
+            "explained": 0
+          },
+          "formatting:rustfmt::skip": {
+            "total": 1,
+            "explained": 0
+          },
+          "formatting:@formatter:off": {
+            "total": 1,
+            "explained": 1
+          }
+        }
+      }
+    },
+    "baseline_files": {
+      "pyproject.toml [ruff ignored rules]": {
+        "kind": "json-path",
+        "entries": 2
+      }
+    },
+    "ci_flags": [
+      {
+        "file": ".github/workflows/quality.yml",
+        "line": 9,
+        "flag": "branch filter",
+        "text": "branches: [main]"
+      },
+      {
+        "file": ".github/workflows/quality.yml",
+        "line": 71,
+        "flag": "conditional step or job",
+        "text": "if: always()"
+      }
+    ]
+  }
+}
