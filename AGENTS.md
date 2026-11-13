@@ -73,7 +73,8 @@ skills/
 Whenever creating or modifying a skill:
 1. Run a scan using `skill-scanner` (`/skill-scanner scan skills/<skill-name>`).
 2. Verify the scan results in a **Clean** or **Low** risk rating.
-3. Ensure no hardcoded tokens, secret paths, prompt injections, or unrestricted file modifications exist.
+3. Check every file in the skill for hidden Unicode (`find skills/<skill-name> -type f -exec apm audit --file {} \; -print`). Any critical or warning finding must be fixed: APM blocks installs on critical findings.
+4. Ensure no hardcoded tokens, secret paths, prompt injections, or unrestricted file modifications exist.
 
 ---
 

@@ -21,7 +21,7 @@ The concrete, actionable side lives in `docs/`:
 
 ## 2. [Skills](skills/README.md)
 
-Modular instruction sets conforming to the [Agent Skills specification](https://agentskills.io/) and installable via [skills.sh](https://skills.sh/) or the [skills CLI](https://github.com/vercel-labs/skills):
+Modular instruction sets conforming to the [Agent Skills specification](https://agentskills.io/) and installable via [skills.sh](https://skills.sh/) (the [skills CLI](https://github.com/vercel-labs/skills)) or [APM](https://github.com/microsoft/apm):
 
 | Skill | Description |
 | :--- | :--- |
@@ -55,4 +55,16 @@ npx skills add fiveid/sid-skills -g
 npx skills add /path/to/sid-skills --skill sid-test
 ```
 
-See the [Skills Guide](skills/README.md) for full usage, directory conventions, and security scanning instructions.
+Or using `apm`:
+
+```bash
+# Install a specific skill from GitHub
+apm install fiveid/sid-skills --skill sid-review
+
+# Install all skills globally
+apm install -g fiveid/sid-skills
+```
+
+If the project has no `.claude/` folder or `CLAUDE.md`, APM can't tell which agent to install for. Add `--target claude` (or your agent).
+
+See the [Skills Guide](skills/README.md) for full usage, directory conventions, and security scanning instructions, and [Managing and sharing skills](docs/guides/managing-and-sharing-skills.md) for how the two tools compare.

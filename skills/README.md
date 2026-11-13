@@ -1,6 +1,6 @@
 # Skills Collection
 
-Reusable agent skills conforming to the [Agent Skills specification](https://agentskills.io/) and installable via the [skills CLI](https://github.com/vercel-labs/skills) (`npx skills`) or [skills.sh](https://skills.sh/).
+Reusable agent skills conforming to the [Agent Skills specification](https://agentskills.io/) and installable via the [skills CLI](https://github.com/vercel-labs/skills) (`npx skills`), [skills.sh](https://skills.sh/) or [APM](https://github.com/microsoft/apm). [Managing and sharing skills](../docs/guides/managing-and-sharing-skills.md) compares the two tools and covers what to check before installing.
 
 ---
 
@@ -50,7 +50,39 @@ npx skills list
 npx skills update
 ```
 
-A `skills-lock.json` file is committed to track third-party skill dependencies.
+Project installs are recorded in a `skills-lock.json` in the project you install into.
+
+### With APM
+
+Install a specific skill by name:
+
+```bash
+apm install fiveid/sid-skills --skill sid-review
+```
+
+APM installs for the agents it detects in the project, such as a `.claude/` folder or `CLAUDE.md` for Claude Code. If there are none, name the agent:
+
+```bash
+apm install fiveid/sid-skills --skill sid-review --target claude
+```
+
+Pass `-g` to install for your user rather than the project:
+
+```bash
+apm install -g fiveid/sid-skills --skill sid-scout
+```
+
+Manage installed skills:
+
+```bash
+# List installed packages (`apm list` shows scripts, not packages)
+apm deps list
+
+# Update to the latest version
+apm update
+```
+
+Project installs are recorded in `apm.yml` and `apm.lock.yaml` in the project you install into. Your `--skill` choices are saved there too, and a later `--skill` adds to them rather than replacing them.
 
 ---
 
@@ -122,3 +154,15 @@ Or scan all skills:
 ```
 
 All skills must pass with a **Clean** or **Low** risk rating before being merged.
+
+### Hidden Unicode Check with `apm audit`
+
+`apm audit --file` adds a mechanical check for invisible characters (zero-width spaces, bidi controls, Unicode tag characters) that can hide instructions from a human reviewer. APM runs the same check on every install and blocks the install on critical findings, so a skill that fails here can't be installed with APM.
+
+Check every file in a skill before merging:
+
+```bash
+find skills/sid-review -type f -exec apm audit --file {} \; -print
+```
+
+Each file is printed after a clean scan; a file with findings is reported and not printed. Fix or remove anything flagged as critical or warning.
