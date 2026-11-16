@@ -67,7 +67,7 @@ Agents pull secrets (ssh keys, MCP tokens, environment variables) into context. 
 
 * **No real secrets in the agent's environment.**
 * **Instructions are suggestions.** For reliability we need hard enforcement: sandboxes, permissions and CI checks that fail loudly.
-* **Scan commits for secrets.** Run gitleaks or trufflehog in pre-commit hooks and CI to catch leaked tokens.
+* **Scan commits for secrets.** Run Betterleaks or trufflehog in pre-commit hooks and CI to catch leaked tokens.
 
 → **Guide:** [Secrets in the agent's environment](secrets.md)  
 → **Guide:** [Docker Sandboxes](docker-sandboxes.md)  

@@ -19,10 +19,11 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-# Packages less than this many days old trigger an age warning
+# A package created less than this many days ago is a slopsquatting signal
 AGE_THRESHOLD_DAYS = 30
 
-# A latest release younger than this many days suggests pinning the previous version
+# A latest release younger than this many days suggests pinning the previous version.
+# Matches the 7-day waiting period recommended across the repo's guides.
 RECENT_RELEASE_DAYS = 7
 
 DEPENDENCY_SECTIONS = ("dependencies", "devDependencies", "peerDependencies")

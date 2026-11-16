@@ -108,6 +108,7 @@ MARKERS: list[tuple[str, str, str]] = [
     # Security
     (r"\bnosemgrep\b", "security", "line"),
     (r"\bnosec\b", "security", "line"),
+    (r"betterleaks:allow", "security", "line"),
     (r"gitleaks:allow", "security", "line"),
     (r"pragma:\s*allowlist\s+secret", "security", "line"),
     (r"trufflehog:ignore", "security", "line"),
@@ -185,6 +186,7 @@ BASELINE_FILES: dict[str, str] = {
     "detekt-baseline.xml": "xml-id",
     "lint-baseline.xml": "xml-issue",
     ".secrets.baseline": "detect-secrets",
+    ".betterleaksignore": "lines",
     ".gitleaksignore": "lines",
     ".trivyignore": "lines",
     ".semgrepignore": "lines",
