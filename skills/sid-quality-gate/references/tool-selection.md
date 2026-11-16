@@ -33,7 +33,7 @@ Check before pinning:
 | crates.io | `cargo search <crate>`, or `https://crates.io/api/v1/crates/<crate>` |
 | Binaries | `gh api repos/<owner>/<repo>/releases --jq '.[0:5][] \| [.tag_name, .published_at, .prerelease]'` |
 
-Pick a release at least two weeks old (see SKILL.md, step 6). Write the chosen version, its release date and the alternatives you rejected into the category row of the record. That evidence is what a later audit's drift check compares against.
+Pick a release at least 7 days old (see SKILL.md, step 6). Write the chosen version, its release date and the alternatives you rejected into the category row of the record. That evidence is what a later audit's drift check compares against.
 
 ## Vetting a tool before its first run
 

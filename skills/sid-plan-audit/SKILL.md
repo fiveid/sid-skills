@@ -61,7 +61,7 @@ Check the plan against four areas. These are where agent-written plans most ofte
 - **Mature task**: Does the change stay inside the domain(s) it belongs to? Does it reuse existing patterns, helpers and libraries, or introduce new ones alongside them? Does it edit shared code, config or migrations? Does it add dependencies? Each new dependency needs human sign-off.
 
 #### Secrets & security
-- **Greenfield**: Is there a plan to keep real secrets out of the agent's environment (dummy keys, mocks, `permissions.deny` on `.env*`)? Is secret scanning (e.g. gitleaks, trufflehog) planned for pre-commit and CI? Will external boundaries (APIs, webhooks, user input) be validated at runtime?
+- **Greenfield**: Is there a plan to keep real secrets out of the agent's environment (dummy keys, mocks, `permissions.deny` on `.env*`)? Is secret scanning (e.g. Betterleaks, trufflehog) planned for pre-commit and CI? Will external boundaries (APIs, webhooks, user input) be validated at runtime?
 - **Mature task**: Does the plan add secrets, env vars or third-party tokens, and will the agent be able to read them? Could a key reach the client bundle (e.g. a `NEXT_PUBLIC_` or `VITE_` prefix) or logs? Does it touch auth, permissions or a new external boundary without saying how input is validated?
 
 #### Testing plan

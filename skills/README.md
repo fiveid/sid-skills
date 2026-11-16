@@ -110,7 +110,7 @@ Skills are instructions, so "breaks how people use it" is a judgement call: a re
 | Skill | Description |
 | :--- | :--- |
 | [`sid-a11y-review`](./sid-a11y-review/SKILL.md) | WCAG 2.2 AA audit for semantic HTML, ARIA, focus, and contrast. |
-| [`sid-dep-audit`](./sid-dep-audit/SKILL.md) | Audit dependencies for supply-chain risk, age gating (< 30 days), and trivial utilities. |
+| [`sid-dep-audit`](./sid-dep-audit/SKILL.md) | Audit dependencies for supply-chain risk, age gating (new releases < 7 days, new packages < 30 days), and trivial utilities. |
 | [`sid-draft`](./sid-draft/SKILL.md) | Fast first-pass React/TypeScript component drafter prioritizing layout fidelity. |
 | [`sid-health-check`](./sid-health-check/SKILL.md) | Maintainability audit for React/TS/Tailwind v4 catching structural debt. |
 | [`sid-pii-check`](./sid-pii-check/SKILL.md) | Scan git changes and code for personal info, local paths, client names, and secrets. |

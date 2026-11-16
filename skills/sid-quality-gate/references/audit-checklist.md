@@ -10,7 +10,7 @@ For each watched file the script reports as changed, read `git diff <anchor> -- 
 | :--- | :--- |
 | Threshold changed | `complexity: 10 → 15`, coverage `lines: 80 → 72`, jscpd `threshold: 2 → 5`, PHPStan `level: 8 → 6`, `fail_under` lowered |
 | Rule disabled or downgraded | `"error" → "warn"`, `→ "off"`, removed from an `extends` list, a strict preset swapped for a recommended one, `strict: true` removed, a mypy module override with `ignore_errors = true` |
-| Exclusion or ignore pattern added or grown | lint `ignores`/`exclude`, coverage `exclude`/`omit`, jscpd `ignore`, Knip `ignore`/`ignoreDependencies`, Semgrep `exclude`, Gitleaks allow-list paths, `tsconfig` `exclude` |
+| Exclusion or ignore pattern added or grown | lint `ignores`/`exclude`, coverage `exclude`/`omit`, jscpd `ignore`, Knip `ignore`/`ignoreDependencies`, Semgrep `exclude`, Betterleaks or Gitleaks allow-list paths, `tsconfig` `exclude` |
 | Tool removed or replaced | A dev dependency removed, a step deleted from the gate script, a config file deleted |
 | Tightened | Report these too. They're changes from the record, and the record should be updated at the owner's request |
 

@@ -1,6 +1,6 @@
 ---
 name: sid-dep-audit
-description: Audit package dependencies for supply-chain risks, slopsquatting, age gating (packages < 30 days old), and unnecessary trivial packages.
+description: Audit package dependencies for supply-chain risks, slopsquatting, age gating (releases < 7 days old, packages < 30 days old), and unnecessary trivial packages.
 ---
 
 ## Skill Behaviour
@@ -26,7 +26,7 @@ python .agents/skills/sid-dep-audit/scripts/audit_deps.py <package-name>
 ### Step 2 — Check Risk Factors
 
 For each dependency under review:
-1. **Age Gating**: Is the package or release version under 30 days old? (High risk window for account hijacking and slopsquatting).
+1. **Age Gating**: Was the version being installed published less than 7 days ago? Most hijacked releases are caught and pulled within hours, so a week's wait avoids nearly all of them; pin the previous version instead. Separately, was the package itself created less than 30 days ago? A brand-new package is the usual shape of slopsquatting and needs a closer look. If a new release fixes a security problem the project is exposed to, say so and recommend it despite its age.
 2. **Triviality**: Is this a micro-utility (like `left-pad`, `is-plain-obj`, `clone-deep`) that modern TypeScript / JavaScript can do natively?
 3. **Resolution / Slopsquatting**: Did the package resolve cleanly on npm, or does the name resemble a hallucinated package?
 
@@ -42,7 +42,8 @@ Present findings in this format:
 
 | Package | Version | Age (Days) | Status | Key Risk / Note |
 | :--- | :--- | :---: | :---: | :--- |
-| `pkg-name` | `1.2.0` | 12 | **AGE WARNING** | Published < 30 days ago |
+| `pkg-name` | `1.2.0` | 3 | **AGE WARNING** | Published < 7 days ago; pin `1.1.4` |
+| `new-pkg` | `0.1.0` | 12 | **AGE WARNING** | Package created < 30 days ago |
 | `is-number` | `7.0.0` | 1800 | **TRIVIAL** | Replace with native TypeScript check |
 
 ---
