@@ -4,6 +4,7 @@ Concrete setups and practices I use and have found worth keeping. Each one puts 
 
 | Guide | What it covers |
 | :--- | :--- |
+| [Building without a coding background](building-without-a-coding-background.md) | Where to start if you're new to software engineering: eight common traps, the guardrail for each, and what to ask the agent. |
 | [Docker Sandboxes](docker-sandboxes.md) | Running Claude Code in a Docker sandbox: SSH, desktop, editors, dependencies, and keeping secrets out with placeholders. |
 | [Managing and sharing skills](managing-and-sharing-skills.md) | Installing, pinning and publishing skills with skills.sh and APM, what to check first, and the gotchas. |
 | [Parallel development](parallel-development.md) | Running a handful of agent lanes in parallel worktrees without hitting a review bottleneck. |

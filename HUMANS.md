@@ -7,6 +7,9 @@ This guide is for humans who are building software with AI. It is based on the f
 - When used effectively, AI can increase productivity without sacrificing quality.
 - Human involvement is necessary; human attention is finite.
 
+> [!TIP]
+> This guide assumes some familiarity with software engineering: version control, tests, code review. If you're new to building software with AI, start with [Building without a coding background](docs/guides/building-without-a-coding-background.md).
+
 ## **A collaborative culture**
 
 If you have ever worked as part of a team, you know the importance of a _working culture_. In brief, we can define it as a shared understanding that encourages collaboration and ensures everyone is pulling in the same direction.
